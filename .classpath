@@ -6,6 +6,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/MIAGE UT1/Desktop/twitter4j-core-4.0.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/MIAGE UT1/Desktop/twitter4j-core-4.0.7.jar" sourcepath="C:/Users/MIAGE UT1/.m2/repository/org/twitter4j/twitter4j-core/4.0.7/twitter4j-core-4.0.7-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/MIAGE UT1/Desktop/lib_api/stream/twitter4j-core-4.0.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/MIAGE UT1/Desktop/lib_api/stream/twitter4j-stream-4.0.7.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

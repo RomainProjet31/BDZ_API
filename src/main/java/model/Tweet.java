@@ -1,5 +1,7 @@
 package model;
 
+import twitter4j.Status;
+
 public class Tweet {
 
     private int idTweet;
@@ -8,6 +10,8 @@ public class Tweet {
     private String inReplyToUserId;
     private String inReplyToScreenName;
     private String inReplyToStatusId;
+    private boolean isRetweet;
+    private boolean isRetweeted;
     private boolean truncated;
     /***
      * Si cet attribut n'est pas nul, alors il s'agit d'un reTweet
@@ -29,15 +33,22 @@ public class Tweet {
      * @param user
      */
     public Tweet(int idTweet, String text, String createdAt, String inReplyToUserId, String inReplyToScreenName,
-	    String inReplyToStatusId, boolean trucated, Tweet tweet, User user) {
+	    String inReplyToStatusId, boolean trucated, User user, boolean isRetweet, Status status,
+	    boolean isRetweeted) {
 	this(idTweet, text, createdAt, inReplyToUserId, inReplyToScreenName, inReplyToStatusId, trucated, user);
-	this.OriginalTweet = tweet;
+	this.isRetweet = isRetweet;
+	this.isRetweeted = isRetweeted;
+	if (isRetweet) {
+	    Tweet originalTweet = new Tweet(status);
+	    this.OriginalTweet = originalTweet;
+	}
     }
 
     public Tweet(twitter4j.Status status) {
 	this((int) status.getId(), status.getText(), status.getCreatedAt().toString(), status.getInReplyToUserId() + "",
 		status.getInReplyToScreenName(), "" + status.getInReplyToStatusId(), status.isTruncated(),
-		new model.User(status.getUser()));
+		new model.User(status.getUser()), status.isRetweet(), status.getRetweetedStatus(),
+		status.isRetweeted());
     }
 
     /***
@@ -64,6 +75,24 @@ public class Tweet {
 	this.truncated = trucated;
 	this.OriginalTweet = null;
 	this.author = user;
+    }
+
+    /*** GETTERS AND SETTERS ***/
+
+    public boolean isRetweet() {
+	return isRetweet;
+    }
+
+    public void setRetweet(boolean isRetweet) {
+	this.isRetweet = isRetweet;
+    }
+
+    public boolean isRetweeted() {
+	return isRetweeted;
+    }
+
+    public void setRetweeted(boolean isRetweeted) {
+	this.isRetweeted = isRetweeted;
     }
 
     public boolean isTruncated() {
