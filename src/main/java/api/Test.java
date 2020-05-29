@@ -13,6 +13,7 @@ public class Test {
 		Tweeter4J.loadTweetsFromUser(user);
 	    for (Tweet tweet : Store.listOfTweets)
 		System.out.println(tweet);
+	    Tweeter4J.insertTweetsFromStore();
 	    Tweeter4J.connect();
 	} catch (TwitterException e) {
 	    e.printStackTrace();

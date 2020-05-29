@@ -1,9 +1,11 @@
 package api;
 
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import factory.Factory;
 import model.Tweet;
 import store.Store;
 import twitter4j.FilterQuery;
@@ -30,6 +32,7 @@ public final class Tweeter4J {
     private static Tweeter4J instance;
     private Twitter twitter;
     private TwitterStream twitterStream;
+    private Factory factory;
 
     /*** SINGLETON ***/
     public static Tweeter4J getInstance() {
@@ -53,6 +56,7 @@ public final class Tweeter4J {
 	Configuration conf = cb.build();
 	TwitterFactory tf = new TwitterFactory(conf);
 	instance.twitter = tf.getInstance();
+	instance.factory = new Factory();
 	instance.twitterStream = null;
 
     }
@@ -66,6 +70,13 @@ public final class Tweeter4J {
 	    @Override
 	    public void onStatus(Status status) {
 		System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
+		model.Tweet twit = new Tweet(status);
+		try {
+		    instance.factory.addNewTweet(twit);
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
 	    }
 
 	    @Override
@@ -127,6 +138,20 @@ public final class Tweeter4J {
 	    model.Tweet tweet = new Tweet(status);
 	    Store.listOfTweets.add(tweet);
 	}
+    }
+
+    public static void insertTweetsFromStore() {
+	for (Tweet tweet : Store.listOfTweets) {
+	    try {
+		instance.factory.addNewTweet(tweet);
+	    } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	}
+	System.out.println("\n NOMBRE DE TWEETS : " + Store.listOfTweets.size() + " \n");
+	instance.factory.test();
+
     }
 
     public static QueryResult query(Query query) throws TwitterException {

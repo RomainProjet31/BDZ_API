@@ -16,7 +16,7 @@ public class Tweet {
     /***
      * Si cet attribut n'est pas nul, alors il s'agit d'un reTweet
      */
-    private Tweet OriginalTweet;
+    private Tweet originalTweet;
     private User author;
 
     /***
@@ -40,8 +40,14 @@ public class Tweet {
 	this.isRetweeted = isRetweeted;
 	if (isRetweet) {
 	    Tweet originalTweet = new Tweet(status);
-	    this.OriginalTweet = originalTweet;
+	    this.originalTweet = originalTweet;
 	}
+	if (this.inReplyToScreenName == null) {
+	    this.inReplyToScreenName = "";
+	    this.inReplyToStatusId = "";
+	    this.inReplyToUserId = "";
+	}
+
     }
 
     public Tweet(twitter4j.Status status) {
@@ -73,7 +79,7 @@ public class Tweet {
 	this.inReplyToScreenName = inReplyToScreenName;
 	this.inReplyToStatusId = inReplyToStatusId;
 	this.truncated = trucated;
-	this.OriginalTweet = null;
+	this.originalTweet = null;
 	this.author = user;
     }
 
@@ -104,11 +110,11 @@ public class Tweet {
     }
 
     public Tweet getOriginalTweet() {
-	return OriginalTweet;
+	return originalTweet;
     }
 
     public void setOriginalTweet(Tweet originalTweet) {
-	OriginalTweet = originalTweet;
+	this.originalTweet = originalTweet;
     }
 
     public User getAuthor() {
@@ -202,7 +208,7 @@ public class Tweet {
 	return "Tweet [idTweet=" + idTweet + ", text=" + text + ", createdAt=" + createdAt + ", inReplyToUserId="
 		+ inReplyToUserId + ", inReplyToScreenName=" + inReplyToScreenName + ", inReplyToStatusId="
 		+ inReplyToStatusId + ", isRetweet=" + isRetweet + ", isRetweeted=" + isRetweeted + ", truncated="
-		+ truncated + ", OriginalTweet=" + OriginalTweet + ", author=" + author + "]";
+		+ truncated + ", OriginalTweet=" + originalTweet + ", author=" + author + "]";
     }
 
 }

@@ -1,8 +1,11 @@
 api\Tweeter4J.class
 store\Store.class
+factory\HelloWorldExample$1.class
 api\Tweeter4J$1.class
 model\Place.class
 model\BoundingBox.class
 model\Tweet.class
+factory\HelloWorldExample.class
 api\Test.class
+factory\Factory.class
 model\User.class
