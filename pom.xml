@@ -5,6 +5,10 @@
 	<groupId>BDZAPI</groupId>
 	<artifactId>BDZAPI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -12,8 +16,10 @@
 			<artifactId>twitter4j-stream</artifactId>
 			<version>4.0.6</version>
 		</dependency>
+		<dependency>
+			<groupId>org.neo4j</groupId>
+			<artifactId>neo4j</artifactId>
+			<version>3.4.6</version>
+		</dependency>
 	</dependencies>
-
-
-
 </project>

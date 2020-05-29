@@ -98,7 +98,6 @@ public final class Tweeter4J {
 	String[] keywordsArray = { " RTL ", "RTL France", "#RTL", "#RTLFrance", "#rtlfrance", "#rtl" };
 	filtre.track(keywordsArray);
 	filtre.language("fr");
-
 	instance.twitterStream.addListener(listener);
 	instance.twitterStream.filter(filtre);
     }
@@ -120,8 +119,9 @@ public final class Tweeter4J {
 
     public static void loadTweetsFromUser(model.User user) throws TwitterException {
 	Twitter twitter = getTwitterInstance();
-	HashSet<Status> tempStatus = twitter.getHomeTimeline().stream().filter(item -> item.getUser().equals(user))
-		.map(item -> item).collect(Collectors.toCollection(HashSet::new));
+	HashSet<Status> tempStatus = twitter.getHomeTimeline().stream()
+		.filter(item -> (item.getUser().getId() + "").equals(user.getIdUser() + "")).map(item -> item)
+		.collect(Collectors.toCollection(HashSet::new));
 	for (Status status : tempStatus) {
 	    // reprendre là
 	    model.Tweet tweet = new Tweet(status);

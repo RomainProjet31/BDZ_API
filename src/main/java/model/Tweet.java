@@ -196,4 +196,13 @@ public class Tweet {
 	    return false;
 	return true;
     }
+
+    @Override
+    public String toString() {
+	return "Tweet [idTweet=" + idTweet + ", text=" + text + ", createdAt=" + createdAt + ", inReplyToUserId="
+		+ inReplyToUserId + ", inReplyToScreenName=" + inReplyToScreenName + ", inReplyToStatusId="
+		+ inReplyToStatusId + ", isRetweet=" + isRetweet + ", isRetweeted=" + isRetweeted + ", truncated="
+		+ truncated + ", OriginalTweet=" + OriginalTweet + ", author=" + author + "]";
+    }
+
 }

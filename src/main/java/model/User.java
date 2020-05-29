@@ -179,4 +179,11 @@ public class User {
 	return true;
     }
 
+    @Override
+    public String toString() {
+	return "User [idUser=" + idUser + ", screenName=" + screenName + ", name=" + name + ", location=" + location
+		+ ", description=" + description + ", createdAt=" + createdAt + ", favCount=" + favCount
+		+ ", friendCount=" + friendCount + ", timeZone=" + timeZone + ", lang=" + lang + ", verified="
+		+ verified + ", followersCount=" + followersCount + ", place=" + place + ", tweets=" + tweets + "]";
+    }
 }
