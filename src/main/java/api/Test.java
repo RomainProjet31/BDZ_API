@@ -8,6 +8,7 @@ public class Test {
 
     public static void main(String[] args) {
 	try {
+	    // Tweeter4J.getInstance().getFactory().clearAll();
 	    Tweeter4J.loadUsers();
 	    for (model.User user : Store.listOfUsers)
 		Tweeter4J.loadTweetsFromUser(user);

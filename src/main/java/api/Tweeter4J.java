@@ -106,7 +106,7 @@ public final class Tweeter4J {
 	};
 
 	FilterQuery filtre = new FilterQuery();
-	String[] keywordsArray = { " RTL ", "RTL France", "#RTL", "#RTLFrance", "#rtlfrance", "#rtl" };
+	String[] keywordsArray = { " RTL ", "RTL France", "RTLFrance", "#RTL", "#RTLFrance", "#rtlfrance", "#rtl" };
 	filtre.track(keywordsArray);
 	filtre.language("fr");
 	instance.twitterStream.addListener(listener);
@@ -136,6 +136,7 @@ public final class Tweeter4J {
 	for (Status status : tempStatus) {
 	    // reprendre là
 	    model.Tweet tweet = new Tweet(status);
+	    user.getTweets().add(tweet);
 	    Store.listOfTweets.add(tweet);
 	}
     }
@@ -145,7 +146,6 @@ public final class Tweeter4J {
 	    try {
 		instance.factory.addNewTweet(tweet);
 	    } catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
 	}
@@ -180,6 +180,46 @@ public final class Tweeter4J {
 
     public static void setInstance(Tweeter4J instance) {
 	Tweeter4J.instance = instance;
+    }
+
+    public static String getKey() {
+	return key;
+    }
+
+    public static void setKey(String key) {
+	Tweeter4J.key = key;
+    }
+
+    public static String getConsumer() {
+	return consumer;
+    }
+
+    public static void setConsumer(String consumer) {
+	Tweeter4J.consumer = consumer;
+    }
+
+    public static String getToken() {
+	return token;
+    }
+
+    public static void setToken(String token) {
+	Tweeter4J.token = token;
+    }
+
+    public static String getTokenSecret() {
+	return tokenSecret;
+    }
+
+    public static void setTokenSecret(String tokenSecret) {
+	Tweeter4J.tokenSecret = tokenSecret;
+    }
+
+    public Factory getFactory() {
+	return factory;
+    }
+
+    public void setFactory(Factory factory) {
+	this.factory = factory;
     }
 
 }
