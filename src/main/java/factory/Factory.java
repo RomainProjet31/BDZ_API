@@ -71,7 +71,7 @@ public class Factory {
 	    con.createStatement().execute(convertToStringCreation(_twit));
 	    checkDependencies(_twit);
 	} else {
-	    System.out.println("\n IL N'Y EST PAS \n");
+	    System.out.println("\n IL Y EST DEJA");
 	}
     }
 
