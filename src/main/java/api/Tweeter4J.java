@@ -25,10 +25,10 @@ import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 
 public final class Tweeter4J {
-    private static String key = "ejRwCA2s2aNOj58SBr7XJfSiV";
-    private static String consumer = "KrBaK0cqduSHyssCaJBBuTlowksSCAAb0wsiRTJGrMJOHbnKNF";
-    private static String token = "1262389953859850242-TSTLXYkBAVlm022znkEY3nYMHNUWOf";
-    private static String tokenSecret = "ccj69LiAOFx3NLZabwv9rPY1mhRRF9J3LgvCaAecsnUoO";
+    private static String key = "PcIR2HAA3q7oAU4lD6XvZnbxg";
+    private static String consumer = "Pls6fpd1AIwzFnFtz8RlhvBDeFu0WeNZacMTUiAjsz02CRfSdk";
+    private static String token = "1262389953859850242-0JJRtwKg8xJrZuUo4jRzDno2NA3Ybj";
+    private static String tokenSecret = "OsyPgeiL3DHokAJ493vCEdUYLIK0ACFatXTL9IXOnhzwE";
     private static Tweeter4J instance;
     private Twitter twitter;
     private TwitterStream twitterStream;

@@ -83,7 +83,7 @@ public class Factory {
 	    addNewUser(_twit.getAuthor());
 	con.createStatement().execute(convertToStringRelationPost(_twit.getAuthor(), _twit));
 
-	if (_twit.isRetweet()) {
+	if (_twit.getOriginalTweet() != null) {
 	    // Verifier que le tweet original soit dans le graph sinon on l'ajoute
 	    result = con.createStatement()
 		    .executeQuery(convertToStringMatchTweet("" + _twit.getOriginalTweet().getIdTweet()));
@@ -230,7 +230,9 @@ public class Factory {
 		+ _twit.getInReplyToUserId() + "\"," + "inReplyToScreenName: \"" + _twit.getInReplyToScreenName()
 		+ "\"," + "inReplyToStatusId: \"" + _twit.getInReplyToStatusId() + "\"," + "isRetweet: \""
 		+ _twit.isRetweet() + "\"," + "isRetweeted: \"" + _twit.isRetweeted() + "\"," + "truncated: \""
-		+ _twit.isTrucated() + "\"," + "author: \"" + _twit.getAuthor().getIdUser() + "\" })";
+		+ _twit.isTrucated() + "\"," + "author: \"" + _twit.getAuthor().getIdUser() + "\"" + ", favCount: \""
+		+ _twit.favCount + "\", replyCount: \"" + _twit.replyCount + "\", hashtags : \""
+		+ _twit.hashtags.toString() + "\", retweetCount : \"" + _twit.retweetCount + "\" })";
 	return cypherStatement;
     }
 

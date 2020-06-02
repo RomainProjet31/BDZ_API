@@ -1,5 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import twitter4j.HashtagEntity;
 import twitter4j.Status;
 
 public class Tweet {
@@ -13,6 +17,10 @@ public class Tweet {
     private boolean isRetweet;
     private boolean isRetweeted;
     private boolean truncated;
+    public int replyCount;
+    public List<String> hashtags;
+    public int favCount;
+    public int retweetCount;
     /***
      * Si cet attribut n'est pas nul, alors il s'agit d'un reTweet
      */
@@ -34,10 +42,12 @@ public class Tweet {
      */
     public Tweet(int idTweet, String text, String createdAt, String inReplyToUserId, String inReplyToScreenName,
 	    String inReplyToStatusId, boolean trucated, User user, boolean isRetweet, Status status,
-	    boolean isRetweeted) {
+	    boolean isRetweeted, int replyCount, int favCount, HashtagEntity[] hashtags, int countRetweet) {
 	this(idTweet, text, createdAt, inReplyToUserId, inReplyToScreenName, inReplyToStatusId, trucated, user);
 	this.isRetweet = isRetweet;
 	this.isRetweeted = isRetweeted;
+	this.replyCount = replyCount;
+	this.favCount = favCount;
 	if (isRetweet) {
 	    Tweet originalTweet = new Tweet(status);
 	    this.originalTweet = originalTweet;
@@ -47,14 +57,19 @@ public class Tweet {
 	    this.inReplyToStatusId = "";
 	    this.inReplyToUserId = "";
 	}
-
+	this.hashtags = new ArrayList<>();
+	for (HashtagEntity hash : hashtags) {
+	    this.hashtags.add(hash.getText());
+	}
+	this.retweetCount = countRetweet;
     }
 
     public Tweet(twitter4j.Status status) {
 	this((int) status.getId(), status.getText(), status.getCreatedAt().toString(), status.getInReplyToUserId() + "",
 		status.getInReplyToScreenName(), "" + status.getInReplyToStatusId(), status.isTruncated(),
-		new model.User(status.getUser()), status.isRetweet(), status.getRetweetedStatus(),
-		status.isRetweeted());
+		new model.User(status.getUser()), status.isRetweet(), status.getRetweetedStatus(), status.isRetweeted(),
+		status.getRetweetCount(), status.getFavoriteCount(), status.getHashtagEntities(),
+		status.getRetweetCount());
     }
 
     /***
@@ -72,6 +87,8 @@ public class Tweet {
     public Tweet(int idTweet, String text, String createdAt, String inReplyToUserId, String inReplyToScreenName,
 	    String inReplyToStatusId, boolean trucated, User user) {
 	super();
+	createdAt = createdAt.substring(3, createdAt.indexOf(":")) + "h";
+
 	this.idTweet = idTweet;
 	this.text = text;
 	this.createdAt = createdAt;
